@@ -45,11 +45,12 @@ public class NFA {
 	 * @param description is the string describing a NFA
 	 */
 	public NFA(String description) {
-		String[] splitDescription = description.split("#");
+		String[] splitDescription = splitDescription(description);
 
-		String[] z = splitDescription[0].split(";");
-		String[] o = splitDescription[1].split(";");
-		String[] e = splitDescription[2].split(";");
+		String[] z = splitDescription[0].length() != 0 ? splitDescription[0].split(";") : new String[0];
+		String[] o = splitDescription[1].length() != 0 ? splitDescription[1].split(";") : new String[0];
+		String[] e = splitDescription[2].length() != 0 ? splitDescription[2].split(";") : new String[0];
+		String[] f = splitDescription[3].length() != 0 ? splitDescription[3].split(",") : new String[0];
 
 		HashMap<Integer, HashSet<Integer>> zeroTransitions = new HashMap<Integer, HashSet<Integer>>();
 		HashMap<Integer, HashSet<Integer>> oneTransitions = new HashMap<Integer, HashSet<Integer>>();
@@ -104,7 +105,6 @@ public class NFA {
 			state.stateOne = stateOne;
 		}
 
-		String[] f = splitDescription.length > 3 ? splitDescription[3].split(",") : new String[0];
 		this.acceptStates = new HashSet<Integer>();
 		for (String state : f) {
 			this.acceptStates.add(Integer.parseInt(state));
@@ -148,6 +148,26 @@ public class NFA {
 			currentState = currentState.getNextState(c);
 		}
 		return !Collections.disjoint(currentState.nfaStates, acceptStates);
+	}
+
+	private static String[] splitDescription(String description) {
+		String[] splitDescription = new String[4];
+
+		String current = "";
+		int currentIndex = 0;
+		for (int i = 0; i < description.length(); i++) {
+			char c = description.charAt(i);
+			if (c == '#') {
+				splitDescription[currentIndex++] = current;
+				current = "";
+			}
+			else {
+				current += c;
+			}
+		}
+		splitDescription[currentIndex] = current;
+
+		return splitDescription;
 	}
 
 	private static HashSet<Integer> getEpsilonClosure(HashSet<Integer> set, HashMap<Integer, HashSet<Integer>> epsilonTransitions) {
