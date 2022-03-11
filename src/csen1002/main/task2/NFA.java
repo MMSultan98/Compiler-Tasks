@@ -55,6 +55,7 @@ public class NFA {
 		HashMap<Integer, HashSet<Integer>> zeroTransitions = new HashMap<Integer, HashSet<Integer>>();
 		HashMap<Integer, HashSet<Integer>> oneTransitions = new HashMap<Integer, HashSet<Integer>>();
 		HashMap<Integer, HashSet<Integer>> epsilonTransitions = new HashMap<Integer, HashSet<Integer>>();
+		int n = 0;
 
 		for (String transition : z) {
 			String[] splitTransition =  transition.split(",");
@@ -63,6 +64,12 @@ public class NFA {
 			HashSet<Integer> s = zeroTransitions.get(i) == null ? new HashSet<Integer>() : zeroTransitions.get(i);
 			s.add(j);
 			zeroTransitions.put(i, s);
+			if (i > n) {
+				n = i;
+			}
+			if (j > n) {
+				n = j;
+			}
 		}
 		for (String transition : o) {
 			String[] splitTransition =  transition.split(",");
@@ -71,6 +78,12 @@ public class NFA {
 			HashSet<Integer> s = oneTransitions.get(i) == null ? new HashSet<Integer>() : oneTransitions.get(i);
 			s.add(j);
 			oneTransitions.put(i, s);
+			if (i > n) {
+				n = i;
+			}
+			if (j > n) {
+				n = j;
+			}
 		}
 		for (String transition : e) {
 			String[] splitTransition =  transition.split(",");
@@ -79,9 +92,20 @@ public class NFA {
 			HashSet<Integer> s = epsilonTransitions.get(i) == null ? new HashSet<Integer>() : epsilonTransitions.get(i);
 			s.add(j);
 			epsilonTransitions.put(i, s);
+			if (i > n) {
+				n = i;
+			}
+			if (j > n) {
+				n = j;
+			}
 		}
 
-		DFAState initialState = new DFAState(getEpsilonClosure(new HashSet<Integer>(Arrays.asList(0)), epsilonTransitions));
+		ArrayList<HashSet<Integer>> epsilonClosures = new ArrayList<HashSet<Integer>>();
+		for (int i = 0; i <= n; i++) {
+			epsilonClosures.add(i, getEpsilonClosure(new HashSet<Integer>(Arrays.asList(i)), epsilonTransitions));
+		}
+
+		DFAState initialState = new DFAState(epsilonClosures.get(0));
 		DFAState deadState = new DFAState();
 		this.states = new ArrayList<DFAState>();
 		this.states.add(initialState);
@@ -89,14 +113,14 @@ public class NFA {
 
 		while (!this.transitionsCompleted()) {
 			DFAState state = getUnfinishedState();
-			HashSet<Integer> zeroNFAStates = getNextNFAStates(state.nfaStates, zeroTransitions, epsilonTransitions);
+			HashSet<Integer> zeroNFAStates = getNextNFAStates(state.nfaStates, zeroTransitions, epsilonClosures);
 			DFAState stateZero = getState(zeroNFAStates);
 			if (stateZero == null) {
 				stateZero = new DFAState(zeroNFAStates);
 				this.states.add(stateZero);
 			}
 			state.stateZero = stateZero;
-			HashSet<Integer> oneNFAStates = getNextNFAStates(state.nfaStates, oneTransitions, epsilonTransitions);
+			HashSet<Integer> oneNFAStates = getNextNFAStates(state.nfaStates, oneTransitions, epsilonClosures);
 			DFAState stateOne = getState(oneNFAStates);
 			if (stateOne == null) {
 				stateOne = new DFAState(oneNFAStates);
@@ -189,13 +213,20 @@ public class NFA {
 		return epsilonClosure;
 	}
 
-	private static HashSet<Integer> getNextNFAStates(HashSet<Integer> nfaStates, HashMap<Integer, HashSet<Integer>> transitions, HashMap<Integer, HashSet<Integer>> epsilonTransitions) {
+	private static HashSet<Integer> getNextNFAStates(HashSet<Integer> nfaStates, HashMap<Integer, HashSet<Integer>> transitions, ArrayList<HashSet<Integer>> epsilonClosures) {
 		HashSet<Integer> nextNFAStates = new HashSet<Integer>();
-		for (Integer state : nfaStates) {
-			HashSet<Integer> set = transitions.get(state) == null ? new HashSet<Integer>() : transitions.get(state);
-			nextNFAStates.addAll(getEpsilonClosure(set, epsilonTransitions));
+		for (Integer nfaState : nfaStates) {
+			HashSet<Integer> nextStates = transitions.get(nfaState) == null ? new HashSet<Integer>() : transitions.get(nfaState);
+			for (int state : nextStates) {	
+				nextNFAStates.addAll(epsilonClosures.get(state));	
+			}
 		}
 		return nextNFAStates;
 	}
 	
+	public static void main(String[] args) {
+		NFA nfa = new NFA("2,3#4,5;7,8#0,1;0,7;1,2;1,4;3,6;5,6;6,1;6,7#8");
+		System.out.println(nfa.run(""));
+	}
+
 }
