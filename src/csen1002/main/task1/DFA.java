@@ -1,8 +1,6 @@
 package csen1002.main.task1;
 
 /**
- * Write your info here
- * 
  * @name Mohammad Marwan Sultan
  * @id 43-3275
  * @labNumber 12

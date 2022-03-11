@@ -7,12 +7,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * Write your info here
- * 
  * @name Mohammad Marwan Sultan
  * @id 43-3275
  * @labNumber 12
  */
+
 public class NFA {
 
 	private class DFAState {
