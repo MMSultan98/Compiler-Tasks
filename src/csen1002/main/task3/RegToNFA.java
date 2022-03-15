@@ -1,8 +1,9 @@
 package csen1002.main.task3;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * @name Mohammad Marwan Sultan
@@ -21,15 +22,14 @@ public class RegToNFA {
 			this.initialState = initialState;
 			this.finalState = finalState;
 		}
-
 	}
 
 	private int numberOfStates;
 	private int initialState;
 	private int finalState;
-	private HashMap<Integer, HashSet<Integer>> zeroTransitions;
-	private HashMap<Integer, HashSet<Integer>> oneTransitions;
-	private HashMap<Integer, HashSet<Integer>> epsilonTransitions;
+	private TreeMap<Integer, TreeSet<Integer>> zeroTransitions;
+	private TreeMap<Integer, TreeSet<Integer>> oneTransitions;
+	private TreeMap<Integer, TreeSet<Integer>> epsilonTransitions;
 
 	/**
 	 * Constructs an NFA corresponding to a regular expression based on Thompson's
@@ -40,9 +40,9 @@ public class RegToNFA {
 	 */
 	public RegToNFA(String regex) {
 		this.numberOfStates = 0;
-		this.zeroTransitions = new HashMap<Integer, HashSet<Integer>>();
-		this.oneTransitions = new HashMap<Integer, HashSet<Integer>>();
-		this.epsilonTransitions = new HashMap<Integer, HashSet<Integer>>();
+		this.zeroTransitions = new TreeMap<Integer, TreeSet<Integer>>();
+		this.oneTransitions = new TreeMap<Integer, TreeSet<Integer>>();
+		this.epsilonTransitions = new TreeMap<Integer, TreeSet<Integer>>();
 
 		LinkedList<NFA> stack = new LinkedList<NFA>();
 		for (int i = 0; i < regex.length(); i++) {
@@ -114,18 +114,18 @@ public class RegToNFA {
 		return result;
 	}
 
-	private static void addTransition(int initialState, int finalState, HashMap<Integer, HashSet<Integer>> transitions) {
-		HashSet<Integer> set = transitions.get(initialState);
+	private static void addTransition(int initialState, int finalState, TreeMap<Integer, TreeSet<Integer>> transitions) {
+		TreeSet<Integer> set = transitions.get(initialState);
 		if (set == null) {
-			set = new HashSet<Integer>();
+			set = new TreeSet<Integer>();
 			transitions.put(initialState, set);
 		}
 		set.add(finalState);
 	}
 
-	private String transitionsToString(HashMap<Integer, HashSet<Integer>> transitions) {
+	private static String transitionsToString(TreeMap<Integer, TreeSet<Integer>> transitions) {
 		String transitionsString = "";
-		for (HashMap.Entry<Integer, HashSet<Integer>> entry : transitions.entrySet()) {
+		for (Map.Entry<Integer, TreeSet<Integer>> entry : transitions.entrySet()) {
 			int i = entry.getKey();
 			for (Integer j : entry.getValue()) {
 				transitionsString += i + "," + j + ";";
