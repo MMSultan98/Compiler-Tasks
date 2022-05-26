@@ -19,21 +19,31 @@ grammar Task9;
 	}
 }
 
+
+// Parser rules
+
 s returns [int check]
-	: a1 = a c1 = c b1 = b { $check = equals($a1.n, $b1.n) * equals($a1.n, $c1.n); }
+	: a c b { $check = equals($a.n, $b.n) * equals($a.n, $c.n); }
 ;
 
 a returns [int n]
-	: 'a' a1 = a { $n = $a1.n + 1; }
+	: A a { $n = $a.n + 1; }
 	| { $n = 0; }
 ;
 
 b returns [int n]
-	: 'b' b1 = b { $n = $b1.n + 1; }
+	: B b { $n = $b.n + 1; }
 	| { $n = 0; }
 ;
 
 c returns [int n]
-	: 'c' c1 = c { $n = $c1.n + 1; }
+	: C c { $n = $c.n + 1; }
 	| { $n = 0; }
 ;
+
+
+// Lexer rules
+
+A : 'a' ;
+B : 'b' ;
+C : 'c' ;

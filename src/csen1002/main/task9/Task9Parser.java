@@ -1,6 +1,5 @@
 package csen1002.main.task9;
 
-// Generated from d:\Mohammad Marwan\College\10th Semester\Advanced Computer Lab (CSEN 1002)\Tasks\Tasks Project\src\csen1002\main\task9\Task9.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -18,7 +17,7 @@ public class Task9Parser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3;
+		A=1, B=2, C=3;
 	public static final int
 		RULE_s = 0, RULE_a = 1, RULE_b = 2, RULE_c = 3;
 	private static String[] makeRuleNames() {
@@ -36,6 +35,7 @@ public class Task9Parser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
+			null, "A", "B", "C"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -103,9 +103,9 @@ public class Task9Parser extends Parser {
 
 	public static class SContext extends ParserRuleContext {
 		public int check;
-		public AContext a1;
-		public CContext c1;
-		public BContext b1;
+		public AContext a;
+		public CContext c;
+		public BContext b;
 		public AContext a() {
 			return getRuleContext(AContext.class,0);
 		}
@@ -128,12 +128,12 @@ public class Task9Parser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(8);
-			((SContext)_localctx).a1 = a();
+			((SContext)_localctx).a = a();
 			setState(9);
-			((SContext)_localctx).c1 = c();
+			((SContext)_localctx).c = c();
 			setState(10);
-			((SContext)_localctx).b1 = b();
-			 ((SContext)_localctx).check =  equals(((SContext)_localctx).a1.n, ((SContext)_localctx).b1.n) * equals(((SContext)_localctx).a1.n, ((SContext)_localctx).c1.n); 
+			((SContext)_localctx).b = b();
+			 ((SContext)_localctx).check =  equals(((SContext)_localctx).a.n, ((SContext)_localctx).b.n) * equals(((SContext)_localctx).a.n, ((SContext)_localctx).c.n); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -149,7 +149,8 @@ public class Task9Parser extends Parser {
 
 	public static class AContext extends ParserRuleContext {
 		public int n;
-		public AContext a1;
+		public AContext a;
+		public TerminalNode A() { return getToken(Task9Parser.A, 0); }
 		public AContext a() {
 			return getRuleContext(AContext.class,0);
 		}
@@ -166,19 +167,19 @@ public class Task9Parser extends Parser {
 			setState(18);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__0:
+			case A:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(13);
-				match(T__0);
+				match(A);
 				setState(14);
-				((AContext)_localctx).a1 = a();
-				 ((AContext)_localctx).n =  ((AContext)_localctx).a1.n + 1; 
+				((AContext)_localctx).a = a();
+				 ((AContext)_localctx).n =  ((AContext)_localctx).a.n + 1; 
 				}
 				break;
 			case EOF:
-			case T__1:
-			case T__2:
+			case B:
+			case C:
 				enterOuterAlt(_localctx, 2);
 				{
 				 ((AContext)_localctx).n =  0; 
@@ -201,7 +202,8 @@ public class Task9Parser extends Parser {
 
 	public static class BContext extends ParserRuleContext {
 		public int n;
-		public BContext b1;
+		public BContext b;
+		public TerminalNode B() { return getToken(Task9Parser.B, 0); }
 		public BContext b() {
 			return getRuleContext(BContext.class,0);
 		}
@@ -218,14 +220,14 @@ public class Task9Parser extends Parser {
 			setState(25);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__1:
+			case B:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(20);
-				match(T__1);
+				match(B);
 				setState(21);
-				((BContext)_localctx).b1 = b();
-				 ((BContext)_localctx).n =  ((BContext)_localctx).b1.n + 1; 
+				((BContext)_localctx).b = b();
+				 ((BContext)_localctx).n =  ((BContext)_localctx).b.n + 1; 
 				}
 				break;
 			case EOF:
@@ -251,7 +253,8 @@ public class Task9Parser extends Parser {
 
 	public static class CContext extends ParserRuleContext {
 		public int n;
-		public CContext c1;
+		public CContext c;
+		public TerminalNode C() { return getToken(Task9Parser.C, 0); }
 		public CContext c() {
 			return getRuleContext(CContext.class,0);
 		}
@@ -268,18 +271,18 @@ public class Task9Parser extends Parser {
 			setState(32);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__2:
+			case C:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(27);
-				match(T__2);
+				match(C);
 				setState(28);
-				((CContext)_localctx).c1 = c();
-				 ((CContext)_localctx).n =  ((CContext)_localctx).c1.n + 1; 
+				((CContext)_localctx).c = c();
+				 ((CContext)_localctx).n =  ((CContext)_localctx).c.n + 1; 
 				}
 				break;
 			case EOF:
-			case T__1:
+			case B:
 				enterOuterAlt(_localctx, 2);
 				{
 				 ((CContext)_localctx).n =  0; 

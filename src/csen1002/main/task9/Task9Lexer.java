@@ -1,6 +1,5 @@
 package csen1002.main.task9;
 
-// Generated from d:\Mohammad Marwan\College\10th Semester\Advanced Computer Lab (CSEN 1002)\Tasks\Tasks Project\src\csen1002\main\task9\Task9.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -18,7 +17,7 @@ public class Task9Lexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3;
+		A=1, B=2, C=3;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -29,7 +28,7 @@ public class Task9Lexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"T__0", "T__1", "T__2"
+			"A", "B", "C"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -42,6 +41,7 @@ public class Task9Lexer extends Lexer {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
+			null, "A", "B", "C"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
