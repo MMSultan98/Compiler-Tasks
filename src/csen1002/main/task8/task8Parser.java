@@ -1,6 +1,5 @@
 package csen1002.main.task8;
 
-// Generated from d:\Mohammad Marwan\College\10th Semester\Advanced Computer Lab (CSEN 1002)\Tasks\Tasks Project\src\csen1002\main\task8\task8.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
